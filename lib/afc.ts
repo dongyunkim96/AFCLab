@@ -1,4 +1,7 @@
 export const FARE = 1500;
+export const DEVICE_COUNT = 24;
+export const ZONES = ['A', 'B', 'C', 'D', 'E', 'F'];
+export const deviceZone = (id:string) => ZONES[Math.floor((Number(id.slice(3))-1)/4)] ?? 'A';
 export const faultNames = { none: '정상 운영', network: '서버 통신 끊김', reader: '카드 리더 오류', gate: '게이트 센서 오류' };
 export type Fault = keyof typeof faultNames;
 export type Log = { id:number; time:string; device:string; card:string; level:'INFO'|'WARN'|'ERROR'; code:string; message:string; amount:number };
@@ -6,8 +9,11 @@ export type State = { cards:{id:string;name:string;balance:number;inside:boolean
 export type Action = {type:'tap';deviceId:string;cardId:string;direction:'entry'|'exit'} | {type:'charge';cardId:string} | {type:'fault';deviceId:string;fault:Fault};
 export function initialState():State { return {
   cards:[{id:'CARD-1001',name:'일반 교통카드',balance:12500,inside:false},{id:'CARD-1002',name:'잔액 부족 카드',balance:800,inside:false},{id:'CARD-1003',name:'테스트 교통카드',balance:5000,inside:false}],
-  devices:['AG-01','AG-02','AG-03','AG-04'].map(id=>({id,fault:'none'})), logs:[],revenue:0,attempts:0,success:0,sequence:0,
+  devices:Array.from({length:DEVICE_COUNT},(_,i)=>({id:`AG-${String(i+1).padStart(2,'0')}`,fault:'none'})), logs:[],revenue:0,attempts:0,success:0,sequence:0,
 }; }
+export function expandFleet(saved:State):State {
+  return {...saved,devices:initialState().devices.map(device=>saved.devices.find(d=>d.id===device.id)??device)};
+}
 export function transition(state:State, action:Action, now=new Date().toISOString()):State {
   const next=structuredClone(state);
   const device='deviceId' in action ? next.devices.find(d=>d.id===action.deviceId):undefined;
