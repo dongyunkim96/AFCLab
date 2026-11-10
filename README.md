@@ -125,6 +125,10 @@ This is an **educational simulator**. The flat fare, entry-time deduction, and a
 
 The current implementation does not process real payments, connect to physical card readers, use a remote approval server, or synchronize multiple users. Device self-checks are simulated state recovery operations. Database and other starter files remain in the repository, but they are not used to store practice data.
 
+## C# Console Simulator
+
+The **C# Demo** tab runs the C# fare engine in the browser using WebAssembly. Select a scenario to see the result, balances, and event codes, or recover a faulty gate and retry. The same engine powers the standalone console and its `--demo` walkthrough. See the [C# guide](csharp/README.md) for web runtime setup and interview practice.
+
 ## Possible Extensions
 
 - Server-side transaction processing through an approval API and database

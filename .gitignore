@@ -20,6 +20,13 @@ next-env.d.ts
 # Test output
 /coverage/
 
+# C# console build output
+/csharp/Afc.Console/bin/
+/csharp/Afc.Console/obj/
+/csharp/Afc.Browser/bin/
+/csharp/Afc.Browser/obj/
+/public/csharp-runtime/
+
 # Package-manager logs
 npm-debug.log*
 yarn-debug.log*

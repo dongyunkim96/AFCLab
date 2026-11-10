@@ -1,0 +1,26 @@
+.csharp-demo-layout { display: grid; grid-template-columns: minmax(180px, 1fr) minmax(0, 2fr); gap: 20px; padding: 20px; }
+.csharp-scenarios { display: grid; align-content: start; gap: 7px; }
+.csharp-scenario { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 10px 12px; text-align: left; border: 1px solid #e3e9e6; border-radius: 6px; background: #f8faf9; color: #38544b; font-size: 12px; }
+.csharp-scenario small { display: block; margin-top: 4px; color: #697b72; font: 10px var(--mono); }
+.csharp-scenario[aria-pressed="true"] { border-color: #83bca8; background: #e8f4ee; }
+.csharp-result { min-width: 0; border: 1px solid #e4ece7; border-radius: 8px; padding: 16px; }
+.csharp-placeholder { display: grid; gap: 10px; align-content: center; min-height: 210px; color: #586d64; }
+.csharp-result h3 { font-size: 13px; font-weight: 700; }
+.csharp-result h3 small { display: inline-block; margin-left: 6px; color: #62746c; font: 10px var(--mono); }
+.csharp-outcome { display: grid; gap: 7px; padding: 12px; border-radius: 5px; font-size: 12px; }
+.csharp-balances { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 14px 0 18px; }
+.csharp-balances div { padding: 8px; background: #f5f8f6; border-radius: 5px; }
+.csharp-balances dt { font-size: 10px; color: #62746c; }
+.csharp-balances dd { margin: 4px 0 0; color: #253d33; font-weight: 700; overflow-wrap: anywhere; }
+.csharp-events { list-style: none; margin: 8px 0; padding: 0; }
+.csharp-events li { display: flex; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid #eaf0ec; font-size: 11px; }
+.csharp-next { margin: 12px 0; line-height: 1.7; color: #546b61; font-size: 11px; }
+.csharp-footnote { padding: 0 20px 16px; color: #64766d; font-size: 11px; }
+@media (max-width: 760px) {
+  .csharp-demo-layout { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+  .csharp-scenarios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .csharp-scenario { padding: 8px; font-size: 10px; }
+  .csharp-scenario small { font-size: 8px; overflow-wrap: anywhere; }
+  .csharp-scenario svg { display: none; }
+  .csharp-result { padding: 12px; }
+}
