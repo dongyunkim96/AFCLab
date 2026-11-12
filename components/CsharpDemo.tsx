@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Code2, Play, RotateCcw } from 'lucide-react';
 import { diagnostics } from '../lib/afc';
 import { translate, type Language } from '../lib/i18n';
+import { recoveryGuide, scenarioGuides } from './csharp-scenario-guide';
 import './csharp-demo.css';
 
 const scenarios = [
@@ -74,6 +75,10 @@ export default function CsharpDemo({ language }: { language: Language }) {
   const detail = result && diagnostics[result.code];
   const recovered = result?.events.some(event => event.code === 'DEVICE_RECOVERED');
   const canRecover = selected && 'recoverable' in selected && result && !result.approved;
+  const guide = selected && (recovered ? recoveryGuide : scenarioGuides[selected.id]);
+  const stepLabels = language === 'ko'
+    ? ['시작 조건', 'C#이 확인하는 내용', '화면에 표시되는 결과']
+    : ['Starting conditions', 'What C# checks', 'What you see'];
 
   return (
     <section className="panel csharp-demo">
@@ -84,7 +89,7 @@ export default function CsharpDemo({ language }: { language: Language }) {
         </div>
         <span className="badge info">C# · WASM</span>
       </header>
-      <div className="csharp-demo-layout">
+      <div className={guide ? 'csharp-demo-layout has-guide' : 'csharp-demo-layout'}>
         <div className="csharp-scenarios" aria-label={label('시연 상황', 'Demo scenarios')}>
           {scenarios.map(scenario => (
             <button type="button" key={scenario.id} className="csharp-scenario"
@@ -128,6 +133,22 @@ export default function CsharpDemo({ language }: { language: Language }) {
             </button>}
           </>}
         </div>
+        {selected && guide && <aside className="csharp-guide" aria-labelledby="csharp-guide-title">
+          <header>
+            <h3 id="csharp-guide-title">{label('C# 처리 흐름', 'How the C# code runs')}</h3>
+            <p>{selected[language]}{recovered && label(' · 복구 후 재시도', ' · Recovery and retry')}</p>
+          </header>
+          <ol className="csharp-guide-steps">
+            {guide[language].map((step, index) => <li key={stepLabels[index]}>
+              <strong>{stepLabels[index]}</strong>
+              <p>{step}</p>
+            </li>)}
+          </ol>
+          <figure className="csharp-guide-code">
+            <figcaption><span>{label('실제 C# 코드 일부', 'Excerpt from the C# source')}</span><code>{guide.source}</code></figcaption>
+            <pre><code>{guide.code}</code></pre>
+          </figure>
+        </aside>}
       </div>
       <p className="csharp-footnote">{label('각 시연은 별도 가상 카드와 단말기로 시작합니다.', 'Each scenario starts with its own virtual card and gate.')}</p>
     </section>

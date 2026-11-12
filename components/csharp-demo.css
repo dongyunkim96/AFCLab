@@ -16,11 +16,27 @@
 .csharp-events li { display: flex; gap: 10px; align-items: center; padding: 7px 0; border-bottom: 1px solid #eaf0ec; font-size: 11px; }
 .csharp-next { margin: 12px 0; line-height: 1.7; color: #546b61; font-size: 11px; }
 .csharp-footnote { padding: 0 20px 16px; color: #64766d; font-size: 11px; }
+.csharp-demo-layout.has-guide { grid-template-columns: minmax(158px, .7fr) minmax(0, 1.1fr) minmax(0, 1.4fr); }
+.csharp-guide { min-width: 0; align-self: start; padding: 16px; border: 1px solid #d9e8e0; border-radius: 8px; background: #f8fbf9; color: #253d33; }
+.csharp-guide h3 { font-size: 15px; font-weight: 700; }
+.csharp-guide header p { margin-top: 4px; color: #546b61; font-size: 12px; }
+.csharp-guide-steps { display: grid; gap: 10px; margin: 14px 0; padding-left: 22px; list-style: decimal; }
+.csharp-guide-steps li { padding-left: 3px; font-size: 12px; line-height: 1.6; }
+.csharp-guide-steps li::marker { color: #376553; font-weight: 700; }
+.csharp-guide-steps p { margin-top: 2px; color: #425d52; overflow-wrap: anywhere; }
+.csharp-guide-code { margin: 0; overflow: hidden; border: 1px solid #28473c; border-radius: 6px; background: #172e26; color: #edf8f1; }
+.csharp-guide-code figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 10px; padding: 8px 10px; border-bottom: 1px solid #38584c; font-size: 11px; color: #cee3d7; }
+.csharp-guide-code pre { margin: 0; padding: 10px; font: 11px/1.6 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; }
+@media (min-width: 761px) and (max-width: 1100px) {
+  .csharp-demo-layout.has-guide { grid-template-columns: minmax(158px, .7fr) minmax(0, 2fr); }
+  .csharp-guide { grid-column: 2; }
+  .csharp-demo-layout.has-guide .csharp-scenarios { grid-row: span 2; }
+}
 @media (max-width: 760px) {
-  .csharp-demo-layout { grid-template-columns: 1fr; gap: 12px; padding: 12px; }
+  .csharp-demo-layout, .csharp-demo-layout.has-guide { grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 12px; }
   .csharp-scenarios { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .csharp-scenario { padding: 8px; font-size: 10px; }
   .csharp-scenario small { font-size: 8px; overflow-wrap: anywhere; }
   .csharp-scenario svg { display: none; }
-  .csharp-result { padding: 12px; }
+  .csharp-result, .csharp-guide { padding: 12px; }
 }
